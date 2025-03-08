@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С 8 Марта!</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #fafafa, #cc00ff);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 24px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+            color: white;
+        }
+
+        .highlight {
+            color: #ffcc29;
+            font-weight: bold;
+        }
+
+        svg {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <svg id="flower" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Стебель -->
+            <rect id="stem" x="98" y="100" width="4" height="60" fill="#2e8b57"/>
+            <!-- Листья -->
+            <ellipse id="leftLeaf" cx="85" cy="140" rx="15" ry="8" fill="#3cb371" opacity="0"/>
+            <ellipse id="rightLeaf" cx="115" cy="140" rx="15" ry="8" fill="#3cb371" opacity="0"/>
+            <!-- Лепестки -->
+            <circle class="petal" cx="100" cy="70" r="20" fill="#ff6b81" opacity="0"/>
+            <circle class="petal" cx="80" cy="90" r="20" fill="#ff6b81" opacity="0"/>
+            <circle class="petal" cx="120" cy="90" r="20" fill="#ff6b81" opacity="0"/>
+            <circle class="petal" cx="90" cy="110" r="20" fill="#ff6b81" opacity="0"/>
+            <circle class="petal" cx="110" cy="110" r="20" fill="#ff6b81" opacity="0"/>
+            <!-- Центр -->
+            <circle id="center" cx="100" cy="100" r="15" fill="#ffcc29" opacity="0"/>
+        </svg>
+
+        <h1 id="message">С 8 Марта <span class="highlight"></span></h1>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Начальное скрытие элементов
+            gsap.set(["#stem", "#leftLeaf", "#rightLeaf", ".petal", "#center"], { opacity: 0 });
+
+            // Анимация роста стебля без разрыва
+            gsap.set("#stem", { scaleY: 0, transformOrigin: "top" });
+            gsap.to("#stem", {
+                scaleY: 1,
+                opacity: 1,
+                duration: 1.5,
+                ease: "power2.out",
+                delay: 0.5
+            });
+
+            // Анимация появления листьев
+            gsap.to(["#leftLeaf", "#rightLeaf"], {
+                opacity: 1, duration: 1, delay: 1.5, ease: "power2.out"
+            });
+
+            // Появление лепестков и центра цветка
+            gsap.to([".petal", "#center"], {
+                opacity: 1, scale: 1, duration: 1.5, stagger: 0.2, ease: "elastic.out(1, 0.5)", delay: 2
+            });
+
+            // Появление поздравления
+            gsap.to("#message", {
+                opacity: 1, y: 0, delay: 3.5, duration: 1.5, ease: "po wer2.out"
+            });
+        });
+    </script>
+
+</body>
+</html>
